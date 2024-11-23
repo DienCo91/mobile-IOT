@@ -2,13 +2,14 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#ffd33d',
-        tabBarActiveBackgroundColor: '#ffe6c3cc',
+        tabBarActiveTintColor: '#2489FF',
+        tabBarActiveBackgroundColor: '#1c2661a8',
         tabBarStyle: {
           backgroundColor: '#25292e',
         },
@@ -21,27 +22,26 @@ const TabLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="about"
-        options={{
-          title: 'About',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'information-circle' : 'information-circle-outline'} color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
+          title: 'Profile User',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'person-circle-sharp' : 'person-circle-outline'} color={color} size={24} />
+          ),
+          headerLeft: () => <Ionicons name="person-circle-sharp" size={24} color="#fff" style={{ marginLeft: 15 }} />,
+        }}
+      />
+      <Tabs.Screen
+        name="chatbot"
+        options={{
+          title: 'Chatbot',
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialCommunityIcons
+              name={focused ? 'robot-excited' : 'robot-excited-outline'}
+              color={color}
+              size={24}
+            />
+          ),
+          headerLeft: () => (
+            <MaterialCommunityIcons name="robot-excited" size={24} color="#fff" style={{ marginLeft: 15 }} />
           ),
         }}
       />
