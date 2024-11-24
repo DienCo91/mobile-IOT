@@ -10,7 +10,7 @@ import { useAppContext } from '../AppProvider/AppProvider';
 const ProfileUser = () => {
   const { sharedData, setSharedData } = useAppContext();
   const onLogout = () => {
-    // setSharedData(null);
+    setSharedData(null);
     router.replace('/(auth)');
   };
 
