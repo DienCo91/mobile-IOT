@@ -1,29 +1,37 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import Button from '@/components/Button';
-import { Image } from 'expo-image';
-import FiledInfoUser from '@/components/FiledInfoUser';
-import Divider from '@/components/Divider';
 import Charts from '@/components/Charts';
+import Divider from '@/components/Divider';
+import FiledInfoUser from '@/components/FiledInfoUser';
+import { Image } from 'expo-image';
+import { router } from 'expo-router';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useAppContext } from '../AppProvider/AppProvider';
 
 const ProfileUser = () => {
+  const { sharedData, setSharedData } = useAppContext();
+  const onLogout = () => {
+    // setSharedData(null);
+    router.replace('/(auth)');
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <Image
-          source={{ uri: 'https://cdn.pixabay.com/photo/2024/06/17/16/39/girl-8836068_640.jpg' }}
+          source={{
+            uri: 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png',
+          }}
           style={styles.image}
         />
-        <FiledInfoUser label="username" value="David" />
+        <FiledInfoUser label="username" value={sharedData?.username} />
         <Divider />
-        <FiledInfoUser label="email" value="david@gmail.com" />
+        <FiledInfoUser label="email" value={sharedData?.email} />
         <Divider />
-        <FiledInfoUser label="age" value="20" />
-        <Divider />
-        <FiledInfoUser label="status" value="good" />
+        <FiledInfoUser label="age" value={sharedData?.age} />
 
-        <TouchableOpacity style={styles.btnChange} activeOpacity={0.8}>
-          <Text style={styles.txt}>Change</Text>
+        <Divider />
+        <TouchableOpacity style={styles.btnChange} activeOpacity={0.8} onPress={onLogout}>
+          <Text style={styles.txt}>Logout</Text>
         </TouchableOpacity>
 
         <Charts label="heart rate" />

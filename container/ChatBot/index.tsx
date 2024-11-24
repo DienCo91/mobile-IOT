@@ -1,7 +1,8 @@
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import React from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import MessageUser from '@/components/MessageUser';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import React from 'react';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { useAppContext } from '../AppProvider/AppProvider';
 
 const data = [
   {
@@ -18,6 +19,9 @@ const data = [
 ];
 
 const ChatBot = () => {
+  const { sharedData } = useAppContext();
+  console.log('🚀 ~ ChatBot ~ sharedData:', sharedData);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flex: 8 }}>

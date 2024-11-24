@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
 import { Image } from 'expo-image';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface IMessageUser {
   item: any;
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%',
     alignItems: 'center',
+    marginBottom: 8,
   },
   image: {
     width: 40,
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginHorizontal: 8,
     paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
+    paddingVertical: 8,
+    borderRadius: 4,
     maxWidth: '80%',
   },
 });

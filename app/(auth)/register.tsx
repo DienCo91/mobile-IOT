@@ -1,6 +1,7 @@
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { URL } from '@/CONST';
 
 interface UserInfo {
   username: string;
@@ -25,10 +26,9 @@ const Register = () => {
     setInfoUser({ ...infoUser, [field]: value });
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const { username, password, confirmPassword, email, age } = infoUser;
 
-    // Kiểm tra dữ liệu nhập vào
     if (!username || !password || !confirmPassword || !email || !age) {
       Alert.alert('Lỗi', 'Vui lòng điền đầy đủ thông tin.');
       return;
@@ -39,14 +39,48 @@ const Register = () => {
       return;
     }
 
-    if (isNaN(Number(age)) || Number(age) < 18) {
-      Alert.alert('Lỗi', 'Tuổi phải là số và lớn hơn hoặc bằng 18.');
+    if (isNaN(Number(age))) {
+      Alert.alert('Lỗi', 'Tuổi phải là số ');
       return;
     }
 
-    // Thực hiện đăng ký thành công
-    Alert.alert('Thành công', 'Đăng ký thành công!');
-    router.replace('..');
+    try {
+      const res = await fetch(`${URL}/user/sign-in`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          email: email,
+          age: age,
+          role: 'user',
+        }),
+      });
+
+      if (!res.ok) {
+        let errorData = null;
+        try {
+          errorData = await res.json();
+        } catch (jsonError) {
+          console.error('Error parsing JSON response:', jsonError);
+          throw new Error(`Error ${res.status}: Invalid JSON response`);
+        }
+        console.error('Error response from server:', errorData);
+        throw new Error(`Error ${res.status}: ${errorData.message || 'Sign-in failed'}`);
+      }
+
+      const data = await res.json();
+      Alert.alert('Đăng ký thành công', 'Bạn đã đăng ký tài khoản thành công!', [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ]);
+      console.log('Success:', data);
+
+      router.replace('..');
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -56,7 +90,7 @@ const Register = () => {
       <TextInput
         style={styles.input}
         placeholder="Username"
-        value={infoUser.username}
+        value={infoUser?.username}
         onChangeText={text => handleInputChange('username', text)}
         autoCapitalize="none"
       />
@@ -64,7 +98,7 @@ const Register = () => {
       <TextInput
         style={styles.input}
         placeholder="Age"
-        value={infoUser.age}
+        value={infoUser?.age}
         onChangeText={text => handleInputChange('age', text)}
         keyboardType="numeric"
       />
@@ -72,7 +106,7 @@ const Register = () => {
       <TextInput
         style={styles.input}
         placeholder="Email"
-        value={infoUser.email}
+        value={infoUser?.email}
         onChangeText={text => handleInputChange('email', text)}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -81,7 +115,7 @@ const Register = () => {
       <TextInput
         style={styles.input}
         placeholder="Password"
-        value={infoUser.password}
+        value={infoUser?.password}
         onChangeText={text => handleInputChange('password', text)}
         secureTextEntry
       />
@@ -89,7 +123,7 @@ const Register = () => {
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
-        value={infoUser.confirmPassword}
+        value={infoUser?.confirmPassword}
         onChangeText={text => handleInputChange('confirmPassword', text)}
         secureTextEntry
       />
