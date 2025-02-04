@@ -1,35 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Button } from 'react-native';
-import { useRouter } from 'expo-router';
-import { URL } from '@/CONST';
 import { useAppContext } from '@/container/AppProvider/AppProvider';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { setSharedData } = useAppContext();
   const router = useRouter();
 
   const handleLogin = async () => {
-    try {
-      const res = await fetch(`${URL}/user/sign-up`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
-
-      const data = await res.json();
-
-      setSharedData(data);
-      router.replace('/(tabs)');
-    } catch (e) {
-      console.error(e);
-    }
+    router.replace('/(tabs)');
   };
 
   const handleRegister = () => {

@@ -33,16 +33,13 @@ const TabLayout = () => {
       <Tabs.Screen
         name="chatbot"
         options={{
-          title: 'Chatbot',
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'robot-excited' : 'robot-excited-outline'}
               color={color}
               size={24}
             />
-          ),
-          headerLeft: () => (
-            <MaterialCommunityIcons name="robot-excited" size={24} color="#fff" style={{ marginLeft: 15 }} />
           ),
         }}
       />

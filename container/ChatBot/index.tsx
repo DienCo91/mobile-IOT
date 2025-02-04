@@ -3,6 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { useAppContext } from '../AppProvider/AppProvider';
+import { Link } from 'expo-router';
 
 const data = [
   {
@@ -35,6 +36,9 @@ const ChatBot = () => {
       <View style={styles.containerInput}>
         <TextInput style={styles.input} multiline placeholder="Enter..." />
         <Ionicons size={24} style={styles.icon} name="paper-plane" />
+        <Link href={'../chatbot/detail'} asChild>
+          <Ionicons size={24} style={styles.icon} name="accessibility" />
+        </Link>
       </View>
     </View>
   );
