@@ -36,7 +36,7 @@ const ChatBot = () => {
       <View style={styles.containerInput}>
         <TextInput style={styles.input} multiline placeholder="Enter..." />
         <Ionicons size={24} style={styles.icon} name="paper-plane" />
-        <Link href={'../chatbot/detail'} asChild>
+        <Link href={`../chatbot/${Math.round(Math.random() * 10)}`} asChild>
           <Ionicons size={24} style={styles.icon} name="accessibility" />
         </Link>
       </View>

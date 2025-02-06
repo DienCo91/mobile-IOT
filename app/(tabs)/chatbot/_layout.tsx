@@ -23,7 +23,14 @@ const Layout = () => {
           ),
         }}
       />
-      <Stack.Screen name="detail" />
+      <Stack.Screen name="modal" options={{ presentation: 'card' }} />
+      <Stack.Screen
+        name="[detail]"
+        options={{
+          animation: 'slide_from_right',
+          title: 'Detail',
+        }}
+      />
     </Stack>
   );
 };

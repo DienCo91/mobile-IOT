@@ -1,9 +1,8 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { AppProvider } from '@/container/AppProvider/AppProvider';
 
 const TabLayout = () => {
   return (
@@ -37,6 +36,19 @@ const TabLayout = () => {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'robot-excited' : 'robot-excited-outline'}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="drawer"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialCommunityIcons
+              name={focused ? 'card-bulleted-settings' : 'card-bulleted-settings-outline'}
               color={color}
               size={24}
             />
